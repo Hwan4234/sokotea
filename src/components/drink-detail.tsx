@@ -2,6 +2,7 @@ import { Stack } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { DrinkPhoto } from '@/components/drink-photo';
+import { OrderButton } from '@/components/order-button';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { BottomTabInset, Colors, Fonts, Spacing } from '@/constants/theme';
@@ -53,6 +54,8 @@ export function DrinkDetail({ id }: { id: string }) {
           Add-ons available when you order.
         </ThemedText>
       )}
+
+      <OrderButton />
     </ScrollView>
   );
 }
