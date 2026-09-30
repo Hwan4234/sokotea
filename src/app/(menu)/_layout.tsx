@@ -2,7 +2,8 @@ import { Stack } from 'expo-router';
 
 import { store } from '@/config/store';
 
-// Stack inside the Menu tab: the menu list, and later the drink detail pushed on top of it.
+// Stack inside the Menu tab: the menu list, with the drink detail (drink/[id]) pushed on top.
+// The detail screen sets its own title from the drink name.
 export default function MenuLayout() {
   return (
     <Stack>
