@@ -1,10 +1,11 @@
 import { Stack } from 'expo-router';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 
+import { DrinkPhoto } from '@/components/drink-photo';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { BottomTabInset, Spacing } from '@/constants/theme';
-import { getDrinkById } from '@/data/menu';
+import { BottomTabInset, Colors, Fonts, Spacing } from '@/constants/theme';
+import { getAddOns, getDrinkById } from '@/data/menu';
 import { formatPrice } from '@/utils/price';
 
 /**
@@ -24,25 +25,52 @@ export function DrinkDetail({ id }: { id: string }) {
   }
 
   const { regular, large } = drink.priceCents;
+  const hasAddOns = getAddOns().length > 0;
 
   return (
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
       contentContainerStyle={styles.content}>
       <Stack.Screen options={{ title: drink.name }} />
-      <ThemedText type="subtitle">{drink.name}</ThemedText>
-      <ThemedText themeColor="textSecondary">{drink.description}</ThemedText>
-      <ThemedText>
-        Regular {formatPrice(regular)}
-        {large !== undefined && ` · Large ${formatPrice(large)}`}
-      </ThemedText>
+
+      <DrinkPhoto drink={drink} style={styles.photo} iconSize={56} />
+
+      <View style={styles.heading}>
+        <ThemedText type="subtitle" themeColor="accent" style={styles.name}>
+          {drink.name}
+        </ThemedText>
+        <ThemedText themeColor="textSecondary">{drink.description}</ThemedText>
+      </View>
+
+      <View style={styles.prices}>
+        <PriceRow label="Regular" cents={regular} />
+        {large !== undefined && <PriceRow label="Large" cents={large} />}
+      </View>
+
+      {/* Toppings are chosen on the MealKeyway ordering page; the full list is in the Add-ons chip. */}
+      {hasAddOns && (
+        <ThemedText type="small" themeColor="textSecondary">
+          Add-ons available when you order.
+        </ThemedText>
+      )}
     </ScrollView>
+  );
+}
+
+function PriceRow({ label, cents }: { label: string; cents: number }) {
+  return (
+    <View style={styles.priceRow}>
+      <ThemedText type="label" themeColor="textSecondary">
+        {label}
+      </ThemedText>
+      <ThemedText style={styles.price}>{formatPrice(cents)}</ThemedText>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   content: {
-    gap: Spacing.two,
+    gap: Spacing.four,
     padding: Spacing.four,
     paddingBottom: BottomTabInset + Spacing.four,
   },
@@ -51,5 +79,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: BottomTabInset,
+  },
+  photo: {
+    width: '100%',
+    aspectRatio: 4 / 3,
+  },
+  heading: {
+    gap: Spacing.one,
+  },
+  name: {
+    fontFamily: Fonts.extraBold,
+  },
+  prices: {
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: Colors.border,
+  },
+  priceRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: Spacing.three,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: Colors.border,
+  },
+  price: {
+    fontFamily: Fonts.bold,
+    fontSize: 18,
+    color: Colors.accent,
+    fontVariant: ['tabular-nums'],
   },
 });
