@@ -7,12 +7,21 @@ import { Colors, Fonts, Spacing } from '@/constants/theme';
 import type { Drink } from '@/types/menu';
 import { formatPrice } from '@/utils/price';
 
-/** One drink in the menu list: photo, name, description, and prices. Opens the detail screen. */
-export function DrinkCard({ drink }: { drink: Drink }) {
+type Props = {
+  drink: Drink;
+  /**
+   * Detail route to open. Each tab has its own copy so the detail opens inside the current
+   * tab instead of jumping to the Menu tab.
+   */
+  detailPathname?: '/drink/[id]' | '/favorites/drink/[id]';
+};
+
+/** One drink in a list: photo, name, description, and prices. Opens the detail screen. */
+export function DrinkCard({ drink, detailPathname = '/drink/[id]' }: Props) {
   const { regular, large } = drink.priceCents;
 
   return (
-    <Link href={{ pathname: '/drink/[id]', params: { id: drink.id } }} asChild>
+    <Link href={{ pathname: detailPathname, params: { id: drink.id } }} asChild>
       <Pressable style={({ pressed }) => [styles.card, pressed && styles.pressed]}>
         <DrinkPhoto drink={drink} style={styles.photo} />
 
