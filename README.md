@@ -1,1 +1,1 @@
-# SokoTea App
+# Soko Tea App
