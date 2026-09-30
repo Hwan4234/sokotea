@@ -42,6 +42,7 @@ Corvallis, OR의 음료 가게 SokoTea의 iOS/Android 앱.
   - `npm install`, `npx expo install`, `npx expo-doctor`처럼 무거운 명령은 **동시에 여러 개 돌리지 말고 하나씩 실행한다.** 실패하면 현재 사용량(`ps -L -u $USER | wc -l`)을 확인하고 다시 실행한다.
   - 필요하면 사용자에게 Metro를 잠시 멈춰 달라고 요청한다. 사용자의 다른 프로세스나 tmux 세션은 종료하지 않는다.
   - Metro 작업 프로세스 수는 `metro.config.js`에서 `maxWorkers = 2`로 제한해 두었다.
+- GitHub remote: `git@github-personal:Hwan4234/sokotea.git` (SSH 별칭 `github-personal`, 계정 Hwan4234)
 
 ### 실행 방법
 
@@ -52,7 +53,6 @@ cd ~/sokotea && nvm use && npx expo start --tunnel
 - **Expo Go 앱과 CLI 모두 같은 Expo 계정으로 로그인해야 한다.** CLI는 `npx expo login`, 확인은 `npx expo whoami`.
 - Metro 캐시는 `metro.config.js`에서 프로젝트 안(`node_modules/.cache/metro`)으로 지정해 두었다. flip의 `/tmp/metro-cache`는 다른 사용자 소유라서 기본 위치를 쓰면 EACCES 에러가 난다. 그래서 `TMPDIR`을 따로 지정할 필요가 없다.
 - 캐시가 꼬였을 때는 `npx expo start --tunnel --clear`로 비운다.
-- GitHub remote: `git@github-personal:Hwan4234/sokotea.git` (SSH 별칭 `github-personal`, 계정 Hwan4234)
 
 ## 작업 규칙
 
