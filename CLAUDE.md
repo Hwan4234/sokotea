@@ -37,6 +37,11 @@ Corvallis, OR의 음료 가게 SokoTea의 iOS/Android 앱.
 - OSU flip 서버 (Rocky Linux, **sudo 권한 없음**), tmux 세션에서 작업
 - 전역 설치가 필요한 도구는 nvm/npx 등 사용자 영역에서만 설치한다. `sudo`를 쓰는 방법은 제안하지 않는다.
 - 서버에 시뮬레이터가 없으므로 실기기의 Expo Go로 확인한다. flip은 폰과 같은 네트워크가 아니므로 `npx expo start --tunnel`을 쓴다.
+- **flip은 사용자당 프로세스+스레드 수를 200개로 제한한다 (`ulimit -u` = 200).** Metro, ngrok, Claude 세션만으로도 약 150개를 쓴다.
+  - 한도를 넘으면 `spawn EAGAIN`, `SIGABRT` 오류가 나거나 명령이 종료 코드 134/137로 끝난다. 프로젝트 문제가 아니다.
+  - `npm install`, `npx expo install`, `npx expo-doctor`처럼 무거운 명령은 **동시에 여러 개 돌리지 말고 하나씩 실행한다.** 실패하면 현재 사용량(`ps -L -u $USER | wc -l`)을 확인하고 다시 실행한다.
+  - 필요하면 사용자에게 Metro를 잠시 멈춰 달라고 요청한다. 사용자의 다른 프로세스나 tmux 세션은 종료하지 않는다.
+  - Metro 작업 프로세스 수는 `metro.config.js`에서 `maxWorkers = 2`로 제한해 두었다.
 
 ### 실행 방법
 
