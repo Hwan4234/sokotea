@@ -2,6 +2,7 @@ import { Stack } from 'expo-router';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { DrinkPhoto } from '@/components/drink-photo';
+import { FavoriteButton } from '@/components/favorite-button';
 import { OrderButton } from '@/components/order-button';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -32,7 +33,12 @@ export function DrinkDetail({ id }: { id: string }) {
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
       contentContainerStyle={styles.content}>
-      <Stack.Screen options={{ title: drink.name }} />
+      <Stack.Screen
+        options={{
+          title: drink.name,
+          headerRight: () => <FavoriteButton drinkId={drink.id} drinkName={drink.name} />,
+        }}
+      />
 
       <DrinkPhoto drink={drink} style={styles.photo} iconSize={56} />
 

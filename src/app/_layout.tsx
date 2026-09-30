@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 
 import AppTabs from '@/components/app-tabs';
 import { Colors, Fonts } from '@/constants/theme';
+import { FavoritesProvider } from '@/hooks/use-favorites';
 
 // Keep the splash screen up until the fonts are loaded, so the app never flashes the
 // system font before switching to Nunito Sans.
@@ -56,7 +57,9 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={navigationTheme}>
-      <AppTabs />
+      <FavoritesProvider>
+        <AppTabs />
+      </FavoritesProvider>
     </ThemeProvider>
   );
 }
