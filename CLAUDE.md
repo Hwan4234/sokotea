@@ -37,6 +37,7 @@ Corvallis, OR의 음료 가게 SOKO TEA의 iOS/Android 앱.
 - 메뉴 데이터는 화면 코드와 분리한다. 실제 데이터로 바꿀 때 **데이터 파일 하나만 교체**하면 되도록 한다.
   - 화면은 데이터 파일을 직접 import하지 않고, 타입이 정의된 접근 함수(예: `getCategories()`, `getDrinkById()`)를 거친다.
   - 샘플 데이터와 실제 데이터는 같은 타입(스키마)을 따른다.
+  - 교체할 파일은 `src/data/menu.json` 하나다 (타입: `src/types/menu.ts`의 `MenuData`, 접근 함수: `src/data/menu.ts`). 구조가 틀리면 `npx tsc --noEmit`이 실패한다.
 - 가게 정보(주소, 전화번호, 영업시간, 인스타그램, MealKeyway URL)는 한 곳의 설정 파일에 모은다.
 
 ## 작업 환경

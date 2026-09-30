@@ -1,0 +1,62 @@
+{
+  "categories": [
+    {
+      "id": "signature",
+      "name": "Signature",
+      "drinkIds": ["cloud-matcha", "taro-coconut-milk-tea", "yuzu-matcha"]
+    },
+    {
+      "id": "matcha",
+      "name": "Matcha",
+      "drinkIds": ["cloud-matcha", "yuzu-matcha", "hojicha-latte"]
+    },
+    {
+      "id": "milk-tea",
+      "name": "Milk Tea",
+      "drinkIds": ["osmanthus-oolong-milk-tea", "honey-black-milk-tea", "taro-coconut-milk-tea"]
+    }
+  ],
+  "drinks": [
+    {
+      "id": "cloud-matcha",
+      "name": "Cloud Matcha",
+      "description": "matcha, milk, whipped cream cloud",
+      "priceCents": { "regular": 650 }
+    },
+    {
+      "id": "yuzu-matcha",
+      "name": "Yuzu Matcha",
+      "description": "matcha, yuzu, milk",
+      "priceCents": { "regular": 625, "large": 695 }
+    },
+    {
+      "id": "hojicha-latte",
+      "name": "Hojicha Latte",
+      "description": "roasted green tea, milk",
+      "priceCents": { "regular": 575, "large": 645 }
+    },
+    {
+      "id": "osmanthus-oolong-milk-tea",
+      "name": "Osmanthus Oolong Milk Tea",
+      "description": "osmanthus oolong, milk",
+      "priceCents": { "regular": 550, "large": 620 }
+    },
+    {
+      "id": "honey-black-milk-tea",
+      "name": "Honey Black Milk Tea",
+      "description": "black tea, honey, milk",
+      "priceCents": { "regular": 525, "large": 595 }
+    },
+    {
+      "id": "taro-coconut-milk-tea",
+      "name": "Taro Coconut Milk Tea",
+      "description": "taro, coconut milk, black tea",
+      "priceCents": { "regular": 675 }
+    }
+  ],
+  "addOns": [
+    { "id": "honey-boba", "name": "Honey Boba", "priceCents": 60 },
+    { "id": "coconut-jelly", "name": "Coconut Jelly", "priceCents": 70 },
+    { "id": "salted-cream", "name": "Salted Cream", "priceCents": 110 }
+  ]
+}
