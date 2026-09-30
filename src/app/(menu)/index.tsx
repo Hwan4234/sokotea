@@ -1,13 +1,13 @@
-import { Link } from 'expo-router';
 import { useRef, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { CategoryChips, type Chip } from '@/components/category-chips';
+import { DrinkCard } from '@/components/drink-card';
 import { OrderButton } from '@/components/order-button';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { BottomTabInset, Spacing } from '@/constants/theme';
-import { getAddOns, getCategories, getDrinksByCategory } from '@/data/menu';
+import { BottomTabInset, Colors, Fonts, Spacing } from '@/constants/theme';
+import { getAddOns, getCategories, getCategoryById, getDrinksByCategory } from '@/data/menu';
 import { formatPrice } from '@/utils/price';
 
 // Add-ons are shown as the last chip, like the menu on sokotea.com.
@@ -45,25 +45,38 @@ export default function MenuScreen() {
   );
 }
 
-// Plain rows for now. Drink cards come in week 1, step 6-3.
 function DrinkList({ categoryId }: { categoryId: string }) {
-  return getDrinksByCategory(categoryId).map((drink) => (
-    <Link key={drink.id} href={{ pathname: '/drink/[id]', params: { id: drink.id } }} asChild>
-      <Pressable style={({ pressed }) => [styles.row, pressed && styles.pressed]}>
-        <ThemedText>{drink.name}</ThemedText>
-        <ThemedText themeColor="accent">{formatPrice(drink.priceCents.regular)}</ThemedText>
-      </Pressable>
-    </Link>
-  ));
+  return (
+    <>
+      <SectionLabel>{getCategoryById(categoryId)?.name}</SectionLabel>
+      {getDrinksByCategory(categoryId).map((drink) => (
+        <DrinkCard key={drink.id} drink={drink} />
+      ))}
+    </>
+  );
 }
 
+// Add-ons are a price list only; toppings are picked on the MealKeyway ordering page.
 function AddOnList() {
-  return getAddOns().map((addOn) => (
-    <View key={addOn.id} style={styles.row}>
-      <ThemedText>{addOn.name}</ThemedText>
-      <ThemedText themeColor="accent">{formatPrice(addOn.priceCents)}</ThemedText>
-    </View>
-  ));
+  return (
+    <>
+      <SectionLabel>Add-ons</SectionLabel>
+      {getAddOns().map((addOn) => (
+        <View key={addOn.id} style={styles.addOnRow}>
+          <ThemedText>{addOn.name}</ThemedText>
+          <ThemedText style={styles.addOnPrice}>{formatPrice(addOn.priceCents)}</ThemedText>
+        </View>
+      ))}
+    </>
+  );
+}
+
+function SectionLabel({ children }: { children?: string }) {
+  return (
+    <ThemedText type="label" themeColor="textSecondary" style={styles.sectionLabel}>
+      {children}
+    </ThemedText>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -82,12 +95,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.four,
     paddingBottom: BottomTabInset + Spacing.four,
   },
-  row: {
+  sectionLabel: {
+    marginTop: Spacing.one,
+    marginBottom: Spacing.one,
+  },
+  addOnRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: Spacing.two,
+    paddingVertical: Spacing.three,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: Colors.border,
   },
-  pressed: {
-    opacity: 0.5,
+  addOnPrice: {
+    fontFamily: Fonts.bold,
+    color: Colors.accent,
+    fontVariant: ['tabular-nums'],
   },
 });
