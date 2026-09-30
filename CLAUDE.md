@@ -9,7 +9,8 @@ Corvallis, OR의 음료 가게 SokoTea의 iOS/Android 앱.
 
 - Expo (React Native) + TypeScript
 - 빌드/배포: EAS Build
-- Node는 Expo가 지원하는 LTS 버전을 쓴다 (nvm으로 관리, 아래 작업 환경 참고)
+- Node는 Expo가 지원하는 LTS 버전을 쓴다 (`.nvmrc` = 22, nvm으로 관리, 아래 작업 환경 참고)
+- Expo 작업 지침(패키지 설치, 문서 확인, 라우팅 규칙): @AGENTS.md
 
 ## 1차 기능 범위
 
