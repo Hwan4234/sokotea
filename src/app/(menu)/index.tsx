@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { CategoryChips, type Chip } from '@/components/category-chips';
 import { DrinkCard } from '@/components/drink-card';
+import { OpenStatusLine } from '@/components/open-status-line';
 import { OrderButton } from '@/components/order-button';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -32,7 +33,8 @@ export default function MenuScreen() {
     <View collapsable={false} style={styles.screen}>
       {/* Fixed area: stays in place while the list scrolls. */}
       <ThemedView style={styles.top}>
-        <View style={styles.orderButton}>
+        <View style={styles.orderArea}>
+          <OpenStatusLine />
           <OrderButton />
         </View>
         <CategoryChips chips={chips} selectedId={selectedId} onSelect={select} />
@@ -88,7 +90,8 @@ const styles = StyleSheet.create({
     paddingTop: Spacing.three,
     paddingBottom: Spacing.three,
   },
-  orderButton: {
+  orderArea: {
+    gap: Spacing.two,
     paddingHorizontal: Spacing.four,
   },
   list: {
