@@ -18,7 +18,7 @@ export type DayHours = { open: string; close: string } | null;
 const OPEN_DAY: DayHours = { open: '11:00', close: '21:00' };
 
 export const store = {
-  name: 'Soko Tea',
+  name: 'SOKO TEA',
   address: {
     street: '2043 NW Monroe Ave',
     city: 'Corvallis',

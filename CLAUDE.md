@@ -1,16 +1,16 @@
-# Soko Tea 모바일 앱
+# SOKO TEA 모바일 앱
 
-Corvallis, OR의 음료 가게 Soko Tea의 iOS/Android 앱.
+Corvallis, OR의 음료 가게 SOKO TEA의 iOS/Android 앱.
 
 - 웹사이트: https://sokotea.com
 - 주문/결제: MealKeyway 외부 주문 페이지. 앱에서 주문 기능을 직접 만들지 않고, 이 페이지를 앱 내 브라우저(`expo-web-browser`)로 연다.
 
 ## 이름 표기 규칙
 
-- **사람이 보는 이름은 "Soko Tea"** (웹사이트 표기, 띄어쓰기 있음): 앱 화면 문구, 앱 이름(`app.json`의 `name`), 문서 제목.
+- **사람이 보는 이름은 "SOKO TEA"** (모두 대문자, 띄어쓰기 있음): 앱 화면 문구, 앱 이름(`app.json`의 `name`), 문서 제목.
   - 화면에서는 문자열을 직접 쓰지 않고 `store.name`(`src/config/store.ts`)을 쓴다.
 - **코드와 ID는 `sokotea`** (소문자, 띄어쓰기 없음): `package.json` name, `app.json`의 `slug`·`scheme`, 번들 ID, 폴더·파일·변수 이름, 저장소 이름.
-- "SokoTea"처럼 붙여 쓴 표기는 쓰지 않는다.
+- "SokoTea", "Soko Tea" 같은 다른 표기는 쓰지 않는다.
 
 ## 기술 스택
 
