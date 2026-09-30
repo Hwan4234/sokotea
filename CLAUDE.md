@@ -37,6 +37,16 @@ Corvallis, OR의 음료 가게 SokoTea의 iOS/Android 앱.
 - OSU flip 서버 (Rocky Linux, **sudo 권한 없음**), tmux 세션에서 작업
 - 전역 설치가 필요한 도구는 nvm/npx 등 사용자 영역에서만 설치한다. `sudo`를 쓰는 방법은 제안하지 않는다.
 - 서버에 시뮬레이터가 없으므로 실기기의 Expo Go로 확인한다. flip은 폰과 같은 네트워크가 아니므로 `npx expo start --tunnel`을 쓴다.
+
+### 실행 방법
+
+```
+cd ~/sokotea && nvm use && npx expo start --tunnel
+```
+
+- **Expo Go 앱과 CLI 모두 같은 Expo 계정으로 로그인해야 한다.** CLI는 `npx expo login`, 확인은 `npx expo whoami`.
+- Metro 캐시는 `metro.config.js`에서 프로젝트 안(`node_modules/.cache/metro`)으로 지정해 두었다. flip의 `/tmp/metro-cache`는 다른 사용자 소유라서 기본 위치를 쓰면 EACCES 에러가 난다. 그래서 `TMPDIR`을 따로 지정할 필요가 없다.
+- 캐시가 꼬였을 때는 `npx expo start --tunnel --clear`로 비운다.
 - GitHub remote: `git@github-personal:Hwan4234/sokotea.git` (SSH 별칭 `github-personal`, 계정 Hwan4234)
 
 ## 작업 규칙
