@@ -70,6 +70,22 @@ export function formatOpenStatus(status: OpenStatus): string {
   return `Closed · opens ${day} ${time}`;
 }
 
+/** Days in the order shown on the Visit tab (week starts Monday, like sokotea.com). */
+export const DISPLAY_WEEK: Weekday[] = [
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
+  'sunday',
+];
+
+/** "11am – 9pm", or "Closed" for a day off. */
+export function formatDayHours(dayHours: DayHours): string {
+  return dayHours ? `${formatTime(dayHours.open)} – ${formatTime(dayHours.close)}` : 'Closed';
+}
+
 /** "21:00" -> "9pm", "11:30" -> "11:30am" (the style used on sokotea.com). */
 export function formatTime(hhmm: string): string {
   const [hour, minute] = hhmm.split(':').map(Number);
